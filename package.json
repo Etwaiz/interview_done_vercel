@@ -1,0 +1,46 @@
+{
+  "name": "mini-request-system",
+  "version": "2.0.0",
+  "description": "Mini Request System — тестовое задание (React + Tailwind)",
+  "main": "src/js/app/index.jsx",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [
+    "webpack",
+    "react",
+    "scss",
+    "starter"
+  ],
+  "author": "Roman Nikiforov",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@tailwindcss/postcss": "^4.3.1",
+    "babel-loader": "^10.1.1",
+    "copy-webpack-plugin": "^14.0.0",
+    "css-loader": "^7.1.4",
+    "html-webpack-plugin": "^5.6.7",
+    "mini-css-extract-plugin": "^2.10.2",
+    "postcss": "^8.5.15",
+    "postcss-loader": "^8.2.1",
+    "sass": "^1.101.0",
+    "sass-loader": "^17.0.0",
+    "tailwindcss": "^4.3.1",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^7.0.3",
+    "webpack-dev-server": "^5.2.5"
+  },
+  "browserslist": [
+    ">0.3%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

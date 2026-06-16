@@ -1,0 +1,20 @@
+/* Tailwind CSS v4 entry.
+   Theme/config is done CSS-first here (no tailwind.config.js needed). */
+
+/* Layer order. Utilities are imported WITHOUT a layer below, so they stay
+   "unlayered" and win over the project's legacy (unlayered) SCSS reset.
+   Theme tokens and preflight remain low-priority inside their layers. */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+/* Tell Tailwind where to look for class names. Paths are relative to this file. */
+@source "../**/*.{html,js,jsx}";
+
+/* Customize the theme here if needed.
+@theme {
+  --color-brand: #00d1b2;
+}
+*/
