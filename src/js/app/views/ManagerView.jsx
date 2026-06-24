@@ -72,7 +72,7 @@ const ManagerView = ({ requests, logs, onUpdateStatus, onDelete, resetLogs }) =>
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
+              className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm text-black bg-white"
             >
               <option value="newest">{t("textManager1")}</option>
               <option value="oldest">{t("textManager2")}</option>

@@ -12,7 +12,7 @@ const LogsView = ({ logs}) => {
     <>
       <table className="w-full table-fixed border-collapse text-sm">
         <thead>
-          <tr className="text-left text-slate-500">
+          <tr className="text-left text-content">
             <th className="w-1/4 border-b border-slate-200 py-2 pr-4 font-medium">{t("textLog3")}</th>
             <th className="w-1/4 border-b border-slate-200 py-2 pr-4 font-medium">{t("textLog10")}</th>
             <th className="w-1/4 border-b border-slate-200 py-2 pr-4 font-medium">{t("textLog2")}</th>
