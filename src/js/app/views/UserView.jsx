@@ -2,13 +2,18 @@ import { useState } from "react";
 import RequestForm from "../components/RequestForm";
 import RequestCard from "../components/RequestCard";
 import { useLang } from "../hooks/lang";
+import { useConfirm } from "../hooks/useConfirm";
 
 const UserView = ({ requests, onCreate, onEdit, onDelete }) => {
   const [editingId, setEditingId] = useState(null);
   const { t } = useLang();
+  const confirm = useConfirm();
 
-  const handleRequestDelete = (id) => {
-    const isConfirmed = window.confirm(t("textUser6"));
+  const handleRequestDelete = async (id) => {
+    const isConfirmed = await confirm({
+      title: t("confirm1"),
+      message: t("textUser6"),
+    });
     if (isConfirmed) {
       onDelete(id);
     }

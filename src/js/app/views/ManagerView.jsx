@@ -3,6 +3,7 @@ import RequestCard from "../components/RequestCard";
 import LogsView from "./LogsView";
 import { STATUSES, STATUS_LABELS_EN, STATUS_LABELS_UA, nextStatus } from "../constants";
 import { useLang } from "../hooks/lang";
+import { useConfirm } from "../hooks/useConfirm";
 
 const FILTERS = ["all", ...STATUSES];
 
@@ -11,6 +12,7 @@ const ManagerView = ({ requests, logs, onUpdateStatus, onDelete, resetLogs }) =>
   const [sort, setSort] = useState("newest");
   const [tab, setTab] = useState("requests");
   const { t, lang } = useLang();
+  const confirm = useConfirm();
   const statusLabels = lang === "ua" ? STATUS_LABELS_UA : STATUS_LABELS_EN;
 
   const visible = requests
@@ -19,10 +21,23 @@ const ManagerView = ({ requests, logs, onUpdateStatus, onDelete, resetLogs }) =>
       sort === "newest" ? b.createdAt - a.createdAt : a.createdAt - b.createdAt
     );
 
-  const handleResetLogs = () => {
-    const isConfirmed = window.confirm(t("textManager5"));
+  const handleResetLogs = async () => {
+    const isConfirmed = await confirm({
+      title: t("confirm1"),
+      message: t("textManager5"),
+    });
     if (isConfirmed) {
       resetLogs();
+    }
+  }
+
+  const handleDelete = async (id) => {
+    const isConfirmed = await confirm({
+      title: t("confirm1"),
+      message: t("confirm4"),
+    });
+    if (isConfirmed) {
+      onDelete(id);
     }
   }
 
@@ -101,7 +116,7 @@ const ManagerView = ({ requests, logs, onUpdateStatus, onDelete, resetLogs }) =>
                           </button>
                         )}
                         <button
-                          onClick={() => onDelete(r.id)}
+                          onClick={() => handleDelete(r.id)}
                           className="rounded-md px-2 py-1 text-red-600 hover:bg-red-50"
                         >
                           {t("textManager4")}

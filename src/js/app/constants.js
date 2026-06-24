@@ -60,6 +60,10 @@ export const translations = {
     textLog8: "Changed status",
     textLog9: "Deleted request",
     textLog10: "Request id",
+    confirm1: "Confirm action",
+    confirm2: "Yes",
+    confirm3: "Cancel",
+    confirm4: "Delete this request?",
   },
   ua: {
     text1: "Mini Request System",
@@ -98,5 +102,9 @@ export const translations = {
     textLog8: "Змінено статус",
     textLog9: "Видалено заявку",
     textLog10: "Номер запиту",
+    confirm1: "Підтвердьте дію",
+    confirm2: "Так",
+    confirm3: "Скасувати",
+    confirm4: "Видалити цю заявку?",
 },
 };
