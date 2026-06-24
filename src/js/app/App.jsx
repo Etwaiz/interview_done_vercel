@@ -57,20 +57,20 @@ const App = () => {
   return (
     <div className="min-h-screen bg-surface text-content">
       <div className="mx-auto max-w-3xl p-6">
-        <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <header className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div className="flex items-center my-4 gap-4">
-              <h1 className="text-2xl font-bold m-0">{t("text1")}</h1>
-              <button onClick={toggleTheme} className="cursor-pointer text-sm text-slate-500 self-end">
-                {t("text2")}: {theme === "dark" ? "🌙" : "☀️"} 
-              </button>
-              <button onClick={() => setLang(lang === "en" ? "ua" : "en")} className="cursor-pointer text-sm text-slate-500 self-end">
-                {t("text3")}: {lang === "en" ? "EN" : "UA"} 
-              </button>
+              <h1 className="text-3xl font-bold m-0">{t("text1")}</h1>
+              <div className="flex items-center my-4 gap-4">
+                <p className="text-sm text-slate-500">
+                  {t("text4")}: {role === "user" ? t("text5") : t("text6")}
+                </p>
+                <button onClick={toggleTheme} className="cursor-pointer text-sm text-slate-500 self-end">
+                  {t("text2")}: {theme === "dark" ? "🌙" : "☀️"} 
+                </button>
+                <button onClick={() => setLang(lang === "en" ? "ua" : "en")} className="cursor-pointer text-sm text-slate-500 self-end">
+                  {t("text3")}: {lang === "en" ? "EN" : "UA"} 
+                </button>
             </div>
-            <p className="text-sm text-slate-500">
-              {t("text4")}: {role === "user" ? t("text5") : t("text6")}
-            </p>
           </div>
 
           <div className="flex gap-2">
