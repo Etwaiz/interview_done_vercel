@@ -10,6 +10,8 @@ const App = () => {
 
   const {theme, toggleTheme} = useTheme();
 
+  const {t, lang, setLang} = useLang();
+
   const addRequest = (title, description) => {
     const newRequest = {
       id: crypto.randomUUID(),
@@ -42,14 +44,17 @@ const App = () => {
       <div className="mx-auto max-w-3xl p-6">
         <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div className="flex gap-3 items-center my-4">
-              <h1 className="text-2xl font-bold m-0">Mini Request System</h1>
-              <button onClick={toggleTheme} className="cursor-pointer text-sm text-slate-500 self-center">
-                {theme === "dark" ? "🌙" : "☀️"} 
+            <div className="flex items-center my-4 gap-4">
+              <h1 className="text-2xl font-bold m-0">{t("text1")}</h1>
+              <button onClick={toggleTheme} className="cursor-pointer text-sm text-slate-500 self-end">
+                {t("text2")}: {theme === "dark" ? "🌙" : "☀️"} 
+              </button>
+              <button onClick={() => setLang(lang === "en" ? "ua" : "en")} className="cursor-pointer text-sm text-slate-500 self-end">
+                {t("text3")}: {lang === "en" ? "EN" : "UA"} 
               </button>
             </div>
             <p className="text-sm text-slate-500">
-              Role: {role === "user" ? "User" : "Manager"}
+              {t("text4")}: {role === "user" ? "User" : "Manager"}
             </p>
           </div>
 
@@ -62,7 +67,7 @@ const App = () => {
                   : "bg-slate-200 text-slate-700"
               }`}
             >
-              User
+              {t("text5")}
             </button>
             <button
               onClick={() => setRole("manager")}
@@ -72,7 +77,7 @@ const App = () => {
                   : "bg-slate-200 text-slate-700"
               }`}
             >
-              Manager
+              {t("text6")}
             </button>
           </div>
         </header>

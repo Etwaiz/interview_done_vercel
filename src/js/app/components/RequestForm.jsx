@@ -1,20 +1,25 @@
 import { useState } from "react";
+import { useLang } from "../hooks/lang";
 
 const RequestForm = ({
   onSubmit,
   initial = { title: "", description: "" },
-  submitLabel = "Create request",
+  submitLabel,
   onCancel,
 }) => {
   const [title, setTitle] = useState(initial.title);
   const [description, setDescription] = useState(initial.description);
   const [error, setError] = useState("");
 
+  const {t, lang} = useLang();
+  
+  submitLabel = submitLabel ?? t("textForm0");
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (title.trim() === "") {
-      setError("Please enter a title");
+      setError(t("textForm1"));
       return;
     }
 
@@ -38,7 +43,7 @@ const RequestForm = ({
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="e.g. Printer is broken"
+          placeholder={t("textForm2")}
           className="box-border w-full rounded-lg border border-slate-300 px-3 py-2 outline-none text-black focus:border-emerald-500 placeholder:text-muted"
         />
       </div>
@@ -49,7 +54,7 @@ const RequestForm = ({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
-          placeholder="Short description of the problem"
+          placeholder={t("textForm2")}
           className="box-border w-full rounded-lg border border-slate-300 px-3 py-2 outline-none text-black focus:border-emerald-500 placeholder:text-muted"
         />
       </div>
@@ -69,7 +74,7 @@ const RequestForm = ({
             onClick={onCancel}
             className="rounded-lg bg-slate-200 px-4 py-2 font-medium text-slate-700 hover:bg-slate-300"
           >
-            Cancel
+            {t("textForm4")}
           </button>
         )}
       </div>

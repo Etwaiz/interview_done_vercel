@@ -1,6 +1,6 @@
 import { useState } from "react";
 import RequestCard from "../components/RequestCard";
-import { STATUSES, STATUS_LABELS, nextStatus } from "../constants";
+import { STATUSES, STATUS_LABELS_EN, nextStatus } from "../constants";
 
 const FILTERS = ["all", ...STATUSES];
 
@@ -28,7 +28,7 @@ const ManagerView = ({ requests, onUpdateStatus, onDelete }) => {
                   : "bg-slate-200 text-slate-700 hover:bg-slate-300"
               }`}
             >
-              {f === "all" ? "All" : STATUS_LABELS[f]}
+              {f === "all" ? "All" : STATUS_LABELS_EN[f]}
             </button>
           ))}
         </div>
@@ -61,7 +61,7 @@ const ManagerView = ({ requests, onUpdateStatus, onDelete }) => {
                         onClick={() => onUpdateStatus(r.id, next)}
                         className="rounded-md bg-emerald-500 px-2 py-1 text-white hover:bg-emerald-600"
                       >
-                        → {STATUS_LABELS[next]}
+                        → {STATUS_LABELS_EN[next]}
                       </button>
                     )}
                     <button
