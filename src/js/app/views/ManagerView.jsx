@@ -1,12 +1,15 @@
 import { useState } from "react";
 import RequestCard from "../components/RequestCard";
-import { STATUSES, STATUS_LABELS_EN, nextStatus } from "../constants";
+import { STATUSES, STATUS_LABELS_EN, STATUS_LABELS_UA, nextStatus } from "../constants";
+import { useLang } from "../hooks/lang";
 
 const FILTERS = ["all", ...STATUSES];
 
 const ManagerView = ({ requests, onUpdateStatus, onDelete }) => {
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState("newest");
+  const { t, lang } = useLang();
+  const statusLabels = lang === "ua" ? STATUS_LABELS_UA : STATUS_LABELS_EN;
 
   const visible = requests
     .filter((r) => filter === "all" || r.status === filter)
@@ -28,7 +31,7 @@ const ManagerView = ({ requests, onUpdateStatus, onDelete }) => {
                   : "bg-slate-200 text-slate-700 hover:bg-slate-300"
               }`}
             >
-              {f === "all" ? "All" : STATUS_LABELS_EN[f]}
+              {f === "all" ? t("textManager0") : statusLabels[f]}
             </button>
           ))}
         </div>
@@ -38,13 +41,13 @@ const ManagerView = ({ requests, onUpdateStatus, onDelete }) => {
           onChange={(e) => setSort(e.target.value)}
           className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
         >
-          <option value="newest">Newest first</option>
-          <option value="oldest">Oldest first</option>
+          <option value="newest">{t("textManager1")}</option>
+          <option value="oldest">{t("textManager2")}</option>
         </select>
       </div>
 
       {visible.length === 0 ? (
-        <p className="text-sm text-slate-500">No requests match the selected filter.</p>
+        <p className="text-sm text-slate-500">{t("textManager3")}</p>
       ) : (
         <div className="space-y-3">
           {visible.map((r) => {
@@ -61,14 +64,14 @@ const ManagerView = ({ requests, onUpdateStatus, onDelete }) => {
                         onClick={() => onUpdateStatus(r.id, next)}
                         className="rounded-md bg-emerald-500 px-2 py-1 text-white hover:bg-emerald-600"
                       >
-                        → {STATUS_LABELS_EN[next]}
+                        → {statusLabels[next]}
                       </button>
                     )}
                     <button
                       onClick={() => onDelete(r.id)}
                       className="rounded-md px-2 py-1 text-red-600 hover:bg-red-50"
                     >
-                      Delete
+                      {t("textManager4")}
                     </button>
                   </>
                 }

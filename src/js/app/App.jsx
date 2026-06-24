@@ -54,7 +54,7 @@ const App = () => {
               </button>
             </div>
             <p className="text-sm text-slate-500">
-              {t("text4")}: {role === "user" ? "User" : "Manager"}
+              {t("text4")}: {role === "user" ? t("text5") : t("text6")}
             </p>
           </div>
 

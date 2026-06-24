@@ -1,12 +1,14 @@
 import { useState } from "react";
 import RequestForm from "../components/RequestForm";
 import RequestCard from "../components/RequestCard";
+import { useLang } from "../hooks/lang";
 
 const UserView = ({ requests, onCreate, onEdit, onDelete }) => {
   const [editingId, setEditingId] = useState(null);
+  const { t } = useLang();
 
   const handleRequestDelete = (id) => {
-    const isConfirmed = window.confirm("Are you sure?");
+    const isConfirmed = window.confirm(t("textUser6"));
     if (isConfirmed) {
       onDelete(id);
     }
@@ -15,15 +17,15 @@ const UserView = ({ requests, onCreate, onEdit, onDelete }) => {
   return (
     <div className="space-y-6">
       <section>
-        <h2 className="mb-3 text-lg font-semibold">New request</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("textUser0")}</h2>
         <RequestForm onSubmit={onCreate} />
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-semibold">My requests ({requests.length})</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("textUser1")} ({requests.length})</h2>
 
         {requests.length === 0 ? (
-          <p className="text-sm text-slate-500">No requests yet — create your first one.</p>
+          <p className="text-sm text-slate-500">{t("textUser2")}</p>
         ) : (
           <div className="space-y-3">
             {requests.map((r) =>
@@ -31,7 +33,7 @@ const UserView = ({ requests, onCreate, onEdit, onDelete }) => {
                 <RequestForm
                   key={r.id}
                   initial={r}
-                  submitLabel="Save"
+                  submitLabel={t("textUser3")}
                   onCancel={() => setEditingId(null)}
                   onSubmit={(title, description) => {
                     onEdit(r.id, title, description);
@@ -49,14 +51,14 @@ const UserView = ({ requests, onCreate, onEdit, onDelete }) => {
                           onClick={() => setEditingId(r.id)}
                           className="rounded-md px-2 py-1 text-emerald-600 hover:bg-emerald-50"
                         >
-                          Edit
+                          {t("textUser4")}
                         </button>
                       )}
                       <button
                         onClick={() => handleRequestDelete(r.id)}
                         className="rounded-md px-2 py-1 text-red-600 hover:bg-red-50"
                       >
-                        Delete
+                        {t("textUser5")}
                       </button>
                     </>
                   }
