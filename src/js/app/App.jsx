@@ -7,10 +7,21 @@ import ManagerView from "./views/ManagerView";
 const App = () => {
   const [role, setRole] = useLocalStorage("role", "user");
   const [requests, setRequests] = useLocalStorage("requests", []);
+  const [logs, setLogs] = useLocalStorage("logs", []);
 
   const {theme, toggleTheme} = useTheme();
 
   const {t, lang, setLang} = useLang();
+
+  const addLog = (action, requestId) => setLogs((prev) => [
+  { id: crypto.randomUUID(), 
+    role, 
+    action, 
+    timestamp: Date.now(),
+    requestId,
+  }, ...prev]);
+
+  const resetLogs = () => setLogs([]);
 
   const addRequest = (title, description) => {
     const newRequest = {
@@ -21,22 +32,26 @@ const App = () => {
       createdAt: Date.now(),
     };
     setRequests((prev) => [newRequest, ...prev]);
+    addLog("textLog6", newRequest.id);
   };
 
   const editRequest = (id, title, description) => {
     setRequests((prev) =>
       prev.map((r) => (r.id === id ? { ...r, title, description } : r))
     );
+    addLog("textLog7", id);
   };
 
   const updateStatus = (id, status) => {
     setRequests((prev) =>
       prev.map((r) => (r.id === id ? { ...r, status } : r))
     );
+    addLog("textLog8", id);
   };
 
   const deleteRequest = (id) => {
     setRequests((prev) => prev.filter((r) => r.id !== id));
+    addLog("textLog9", id);
   };
 
   return (
@@ -93,6 +108,8 @@ const App = () => {
           ) : (
             <ManagerView
               requests={requests}
+              logs={logs}
+              resetLogs={resetLogs}
               onUpdateStatus={updateStatus}
               onDelete={deleteRequest}
             />
