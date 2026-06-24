@@ -39,7 +39,7 @@ const RequestForm = ({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="e.g. Printer is broken"
-          className="box-border w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500"
+          className="box-border w-full rounded-lg border border-slate-300 px-3 py-2 outline-none text-black focus:border-emerald-500 placeholder:text-muted"
         />
       </div>
 
@@ -50,7 +50,7 @@ const RequestForm = ({
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
           placeholder="Short description of the problem"
-          className="box-border w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500"
+          className="box-border w-full rounded-lg border border-slate-300 px-3 py-2 outline-none text-black focus:border-emerald-500 placeholder:text-muted"
         />
       </div>
 

@@ -5,6 +5,13 @@ import RequestCard from "../components/RequestCard";
 const UserView = ({ requests, onCreate, onEdit, onDelete }) => {
   const [editingId, setEditingId] = useState(null);
 
+  const handleRequestDelete = (id) => {
+    const isConfirmed = window.confirm("Are you sure?");
+    if (isConfirmed) {
+      onDelete(id);
+    }
+  }
+
   return (
     <div className="space-y-6">
       <section>
@@ -46,7 +53,7 @@ const UserView = ({ requests, onCreate, onEdit, onDelete }) => {
                         </button>
                       )}
                       <button
-                        onClick={() => onDelete(r.id)}
+                        onClick={() => handleRequestDelete(r.id)}
                         className="rounded-md px-2 py-1 text-red-600 hover:bg-red-50"
                       >
                         Delete

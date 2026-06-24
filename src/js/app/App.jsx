@@ -1,10 +1,14 @@
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useTheme } from "./hooks/useTheme";
+import { useLang } from "./hooks/lang";
 import UserView from "./views/UserView";
 import ManagerView from "./views/ManagerView";
 
 const App = () => {
   const [role, setRole] = useLocalStorage("role", "user");
   const [requests, setRequests] = useLocalStorage("requests", []);
+
+  const {theme, toggleTheme} = useTheme();
 
   const addRequest = (title, description) => {
     const newRequest = {
@@ -34,11 +38,16 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-surface text-content">
       <div className="mx-auto max-w-3xl p-6">
         <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold">Mini Request System</h1>
+            <div className="flex gap-3 items-center my-4">
+              <h1 className="text-2xl font-bold m-0">Mini Request System</h1>
+              <button onClick={toggleTheme} className="cursor-pointer text-sm text-slate-500 self-center">
+                {theme === "dark" ? "🌙" : "☀️"} 
+              </button>
+            </div>
             <p className="text-sm text-slate-500">
               Role: {role === "user" ? "User" : "Manager"}
             </p>

@@ -9,12 +9,26 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Tell Tailwind where to look for class names. Paths are relative to this file. */
 @source "../**/*.{html,js,jsx}";
 
-/* Customize the theme here if needed.
 @theme {
-  --color-brand: #00d1b2;
+  --color-content: var(--content);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
 }
-*/
+
+@layer base {
+  :root {
+    --content: #1a1a1a;
+    --surface: #f8fafc;
+    --muted: #6b7280;
+  }
+  .dark {
+    --content: #f3f4f6;
+    --surface: #111827;
+    --muted: #9ca3af;
+  }
+}

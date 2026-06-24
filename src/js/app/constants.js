@@ -15,3 +15,12 @@ export function formatDate(ts) {
   if (!ts) return "";
   return new Date(ts).toLocaleString();
 }
+
+export const translations = {
+  en : {
+    text1: "Mini Request System"
+  },
+  uk: { 
+    text1: "Система обробки запитань"
+  },
+};
