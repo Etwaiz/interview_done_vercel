@@ -30,6 +30,7 @@ const App = () => {
       description,
       status: "new",
       createdAt: Date.now(),
+      isArchived: false,
     };
     setRequests((prev) => [newRequest, ...prev]);
     addLog("textLog6", newRequest.id);
@@ -51,6 +52,13 @@ const App = () => {
 
   const deleteRequest = (id) => {
     setRequests((prev) => prev.filter((r) => r.id !== id));
+    addLog("textLog9", id);
+  };
+
+  const achiveRequest = (id) => {
+    setRequests((prev) =>
+      prev.map((r) => (r.id === id ? { ...r,  isArchived: true} : r))
+    );
     addLog("textLog9", id);
   };
 
@@ -112,6 +120,7 @@ const App = () => {
               resetLogs={resetLogs}
               onUpdateStatus={updateStatus}
               onDelete={deleteRequest}
+              onArchive={achiveRequest}
             />
           )}
         </main>

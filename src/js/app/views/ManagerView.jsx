@@ -5,18 +5,23 @@ import { STATUSES, STATUS_LABELS_EN, STATUS_LABELS_UA, nextStatus } from "../con
 import { useLang } from "../hooks/lang";
 import { useConfirm } from "../hooks/useConfirm";
 
-const FILTERS = ["all", ...STATUSES];
+const FILTERS = ["all", "archived", ...STATUSES];
 
-const ManagerView = ({ requests, logs, onUpdateStatus, onDelete, resetLogs }) => {
+const ManagerView = ({ requests, logs, onUpdateStatus, onDelete, resetLogs, onArchive }) => {
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState("newest");
   const [tab, setTab] = useState("requests");
   const { t, lang } = useLang();
   const confirm = useConfirm();
   const statusLabels = lang === "ua" ? STATUS_LABELS_UA : STATUS_LABELS_EN;
-
+  
   const visible = requests
-    .filter((r) => filter === "all" || r.status === filter)
+    .filter((r) => {
+      if (filter === "archived") return r.isArchived;
+      if (r.isArchived) return false;
+      if (filter === "all") return true;
+      return r.status === filter;
+    })
     .sort((a, b) =>
       sort === "newest" ? b.createdAt - a.createdAt : a.createdAt - b.createdAt
     );
@@ -79,7 +84,7 @@ const ManagerView = ({ requests, logs, onUpdateStatus, onDelete, resetLogs }) =>
                       : "bg-slate-200 text-slate-700 hover:bg-slate-300"
                   }`}
                 >
-                  {f === "all" ? t("textManager0") : statusLabels[f]}
+                  {f === "all" ? t("textManager0") : f === "archived" ? "Archived" : statusLabels[f]}
                 </button>
               ))}
             </div>
@@ -121,6 +126,11 @@ const ManagerView = ({ requests, logs, onUpdateStatus, onDelete, resetLogs }) =>
                         >
                           {t("textManager4")}
                         </button>
+                        {!r.isArchived && <button 
+                        onClick={() => onArchive(r.id)} 
+                        className="rounded-md bg-emerald-500 px-2 py-1 text-white hover:bg-emerald-600">
+                          Archive
+                        </button>}
                       </>
                     }
                   />
